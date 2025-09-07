@@ -45,3 +45,4 @@ yarn-error.log*
 # Mac / Linux / Windows
 .DS_Store
 Thumbs.db
+bun.lock
