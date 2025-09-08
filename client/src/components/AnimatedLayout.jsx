@@ -1,10 +1,8 @@
 import React from "react";
-import ParticleSystem from "./ParticleSystem";
 
 const AnimatedLayout = ({ children }) => {
   return (
     <section className="relative overflow-hidden min-h-screen">
-      <ParticleSystem />
 
       {/* Animated Background Elements */}
       <div className="absolute inset-0 z-0">
