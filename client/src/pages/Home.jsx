@@ -12,7 +12,6 @@ const Home = () => {
       <HeroSection />
       <StatsAndFeaturesSection />
       <CompleteDigitalSolutionsSection />
-      
       <WelcomeSection />
       <Footer />
     </div>
