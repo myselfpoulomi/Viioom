@@ -9,8 +9,8 @@ const Home = () => {
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
       <HeroSection />
-      <WelcomeSection />
       <CompleteDigitalSolutionsSection />
+      <WelcomeSection />
       <Footer />
     </div>
   );
