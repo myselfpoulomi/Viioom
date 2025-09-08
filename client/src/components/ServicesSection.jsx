@@ -126,12 +126,12 @@ const ServicesSection = () => {
             their digital presence and connect with customers.
           </p>
           <div className="flex gap-4 justify-center">
-            <button className="magnetic-btn animated-gradient text-primary-foreground px-8 py-3 rounded-full font-semibold hover:scale-110 transition-transform">
+            <a href="/create-profile" className="magnetic-btn animated-gradient text-primary-foreground px-8 py-3 rounded-full font-semibold hover:scale-110 transition-transform">
               Create Your Profile
-            </button>
-            <button className="glassmorphism px-8 py-3 rounded-full font-semibold text-foreground hover:scale-105 transition-transform">
+            </a>
+            <a href="#services" className="glassmorphism px-8 py-3 rounded-full font-semibold text-foreground hover:scale-105 transition-transform">
               Learn More
-            </button>
+            </a>
           </div>
         </div>
       </div>

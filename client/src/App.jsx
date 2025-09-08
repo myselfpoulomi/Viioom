@@ -11,6 +11,7 @@ import Services from "./pages/Services";
 import Profiles from "./pages/Profiles";
 import Ratings from "./pages/Ratings";
 import NotFound from "./pages/NotFound";
+import CreateProfile from "./pages/CreateProfile";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/profiles" element={<Profiles />} />
             <Route path="/ratings" element={<Ratings />} />
+            <Route path="/create-profile" element={<CreateProfile />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

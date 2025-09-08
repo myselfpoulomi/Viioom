@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import Counter from "./Counter";
 import ParticleSystem from "./ParticleSystem";
 
@@ -114,9 +115,9 @@ const HeroSection = () => {
         </div>
 
         <div className="scroll-reveal">
-          <button className="magnetic-btn animated-gradient text-primary-foreground px-8 py-4 rounded-full text-lg font-semibold mb-12 transform hover:scale-110 shadow-2xl">
+          <Link to="/create-profile" className="inline-block magnetic-btn animated-gradient text-primary-foreground px-8 py-4 rounded-full text-lg font-semibold mb-12 transform hover:scale-110 shadow-2xl">
             Create Your Profile
-          </button>
+          </Link>
         </div>
 
         {/* Live Stats */}
