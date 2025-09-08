@@ -120,32 +120,6 @@ const HeroSection = () => {
           </Link>
         </div>
 
-        {/* Live Stats */}
-        <div className="scroll-reveal grid grid-cols-3 gap-8 max-w-2xl mx-auto mb-8">
-          <div className="glassmorphism p-4 rounded-2xl">
-            <Counter
-              target={50000}
-              className="text-3xl font-bold animated-gradient bg-clip-text text-transparent"
-            />
-            <div className="text-sm text-muted-foreground">Active Users</div>
-          </div>
-          <div className="glassmorphism p-4 rounded-2xl">
-            <Counter
-              target={1000000}
-              className="text-3xl font-bold animated-gradient bg-clip-text text-transparent"
-            />
-            <div className="text-sm text-muted-foreground">Links Shared</div>
-          </div>
-          <div className="glassmorphism p-4 rounded-2xl">
-            <Counter
-              target={99}
-              suffix="%"
-              className="text-3xl font-bold animated-gradient bg-clip-text text-transparent"
-            />
-            <div className="text-sm text-muted-foreground">Uptime</div>
-          </div>
-        </div>
-
         <div className="scroll-reveal">
           <div className="inline-flex items-center space-x-2 text-muted-foreground glassmorphism px-4 py-2 rounded-full">
             <svg

@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection .jsx";
 import WelcomeSection from "../components/WelcomeSection";
 import CompleteDigitalSolutionsSection from "../components/CompleteDigitalSolutionsSection";
+import StatsAndFeaturesSection from "../components/StatsAndFeaturesSection";
 import Footer from "../components/Footer";
 
 const Home = () => {
@@ -9,7 +10,9 @@ const Home = () => {
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
       <HeroSection />
+      <StatsAndFeaturesSection />
       <CompleteDigitalSolutionsSection />
+      
       <WelcomeSection />
       <Footer />
     </div>
