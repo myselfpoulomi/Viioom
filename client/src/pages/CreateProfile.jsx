@@ -6,18 +6,18 @@ import AnimatedLayout from "../components/AnimatedLayout";
 const StepIndicator = ({ currentStep }) => {
   const steps = useMemo(() => [1, 2, 3], []);
   return (
-    <div className="flex items-center justify-between mb-8">
+    <div className="w-full flex items-center justify-center gap-6 mb-8">
       {steps.map((s, i) => (
-        <div key={s} className="flex-1 flex items-center">
+        <div key={s} className="flex items-center">
           <div
-            className={`w-8 h-8 rounded-full flex items-center justify-center font-semibold mr-3 ${
+            className={`w-8 h-8 rounded-full flex items-center justify-center font-semibold ${
               currentStep >= s ? "animated-gradient text-primary-foreground" : "bg-muted text-muted-foreground"
             }`}
           >
             {currentStep > s ? "✓" : s}
           </div>
           {i < steps.length - 1 && (
-            <div className={`h-1 flex-1 rounded-full ${currentStep > s ? "bg-primary/60" : "bg-muted"}`} />
+            <div className={`h-1 w-56 mx-4 rounded-full ${currentStep > s ? "bg-primary/60" : "bg-muted"}`} />
           )}
         </div>
       ))}
