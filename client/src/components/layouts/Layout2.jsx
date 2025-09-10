@@ -171,9 +171,9 @@ const Layout2 = () => {
           </div>
         </div>
 
-        {/* Media Section - Vertical Layout */}
+        {/* Photo Gallery Section - Vertical Layout */}
         <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d">
-          <h2 className="text-2xl font-semibold mb-6">Media</h2>
+          <h2 className="text-2xl font-semibold mb-6">Photo Gallery</h2>
           <div className="space-y-4">
             {profile.gallery.map((src, i) => (
               <div key={i} className="rounded-xl overflow-hidden glassmorphism border border-border/60 cursor-pointer hover:scale-105 transition-transform" onClick={() => openModal(src, 'image')}>
