@@ -1,11 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layout1 from "../components/layouts/Layout1";
+import Layout2 from "../components/layouts/Layout2";
 import { useAuth } from "../contexts/AuthContext";
 
 const layoutIdToComponent = {
   modern: Layout1,
-  // Map other ids (classic, vibrant, elegant, structured, dynamic) when available
+  classic: Layout2,
+  // Map other ids (vibrant, elegant, structured, dynamic) when available
 };
 
 const User = () => {
