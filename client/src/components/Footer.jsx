@@ -5,22 +5,6 @@ const Footer = () => {
     <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-muted/20 to-background relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Newsletter Section */}
-        <div className="glassmorphism p-8 rounded-2xl mb-12 text-center">
-          <h3 className="text-2xl font-bold text-foreground mb-2">Stay in the loop</h3>
-          <p className="text-muted-foreground mb-6">
-            Get the latest updates and features delivered to your inbox
-          </p>
-          <div className="flex flex-col sm:flex-row max-w-md mx-auto gap-3">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-full bg-background/50 border border-border focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            <button className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-full font-semibold hover:scale-105">
-              Subscribe
-            </button>
-          </div>
-        </div>
 
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-4 gap-8 mb-8">

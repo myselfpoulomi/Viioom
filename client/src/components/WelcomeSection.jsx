@@ -49,15 +49,7 @@ const WelcomeSection = () => {
           </div>
           
           {/* CTA Button */}
-          <div className="mt-8">
-            <Button 
-              size="lg" 
-              className="magnetic-btn animated-gradient text-primary-foreground px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 transform hover:scale-105"
-            >
-              Start Your Digital Journey
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </div>
+         
         </div>
       </div>
     </section>
