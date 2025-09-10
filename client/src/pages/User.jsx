@@ -43,7 +43,7 @@ const User = () => {
 
   const handleEdit = () => {
     setMenuOpen(false);
-    navigate("/create-profile");
+    navigate("/create-profile", { state: { isEditMode: true } });
   };
 
   const handleDelete = () => {

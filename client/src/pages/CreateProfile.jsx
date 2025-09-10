@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AnimatedLayout from "../components/AnimatedLayout";
@@ -50,7 +50,9 @@ const SectionCard = ({ title, children }) => (
 );
 
 const CreateProfile = () => {
-  const [step, setStep] = useState(1);
+  const location = useLocation();
+  const isEditMode = location.state?.isEditMode || false;
+  const [step, setStep] = useState(isEditMode ? 3 : 1);
   const navigate = useNavigate();
 
   const next = useCallback(() => setStep((s) => Math.min(3, s + 1)), []);
@@ -63,12 +65,12 @@ const CreateProfile = () => {
         <div className="max-w-5xl mx-auto pt-24 pb-16 px-4">
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl font-bold animated-gradient bg-clip-text text-transparent">
-              Create Your Business Profile
+              {isEditMode ? "Edit Your Business Profile" : "Create Your Business Profile"}
             </h1>
             <p className="text-muted-foreground mt-2">
               {step === 1 && "Let's start with your personal information"}
               {step === 2 && "Verify your email address"}
-              {step === 3 && "Complete your business profile"}
+              {step === 3 && (isEditMode ? "Update your business profile" : "Complete your business profile")}
             </p>
           </div>
 
@@ -200,7 +202,9 @@ const CreateProfile = () => {
                 </div>
                 <div className="mt-6 flex items-center justify-between">
                   <button onClick={prev} className="glassmorphism px-5 py-3 rounded-lg font-semibold text-foreground">Back</button>
-                  <button onClick={() => navigate('/profile')} className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-lg font-semibold">Create Profile</button>
+                  <button onClick={() => navigate('/profile')} className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-lg font-semibold">
+                    {isEditMode ? "Update Profile" : "Create Profile"}
+                  </button>
                 </div>
               </SectionCard>
             </div>
