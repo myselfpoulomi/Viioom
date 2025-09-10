@@ -2,8 +2,8 @@ import React from 'react';
 import { Users, Star, Award, User2, Bolt, MessageSquare } from 'lucide-react';
 
 const Stat = ({ icon: Icon, value, label, bg }) => (
-  <div className="flex flex-col items-center text-center">
-    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 ${bg}`}>
+  <div className="card-3d glassmorphism rounded-2xl p-8 text-center border border-border/60 group cursor-pointer scroll-reveal transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110 ${bg}`}>
       <Icon className="text-white" size={28} />
     </div>
     <div className="text-4xl font-bold text-foreground mb-2">{value}</div>
@@ -12,8 +12,8 @@ const Stat = ({ icon: Icon, value, label, bg }) => (
 );
 
 const FeatureCard = ({ icon: Icon, title, description, bg }) => (
-  <div className="glassmorphism rounded-2xl p-6 text-center border border-border/60">
-    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 ${bg}`}>
+  <div className="card-3d glassmorphism rounded-2xl p-8 text-center border border-border/60 group cursor-pointer scroll-reveal transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110 ${bg}`}>
       <Icon className="text-white" size={22} />
     </div>
     <h4 className="text-foreground font-semibold mb-2">{title}</h4>
