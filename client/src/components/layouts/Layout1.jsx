@@ -223,9 +223,6 @@ const Layout1 = () => {
             </div>
           </div>
         </div>
-
-       
-    
       </div>
     </div>
   );
