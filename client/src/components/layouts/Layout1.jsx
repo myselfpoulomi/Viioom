@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button';
-import { Phone, Mail, MapPin, Clock, Star, Globe, ExternalLink, Download, QrCode, Copy } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Star, Globe, ExternalLink, Download, QrCode, Copy, X } from 'lucide-react';
 import Navbar from '../Navbar';
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const profile = {
   name: 'Alex Johnson',
@@ -39,8 +39,8 @@ const profile = {
     'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=600&auto=format&fit=crop',
   ],
   videos: [
-    'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    'https://www.youtube.com/embed/oHg5SJYRHA0',
+    'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
+    'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4',
   ],
 };
 
@@ -48,6 +48,8 @@ const Layout1 = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const coverSrc = params.get('bg') || profile.cover;
+  const [modalContent, setModalContent] = useState(null);
+  const [modalType, setModalType] = useState(null);
   
   useEffect(() => {
     const container = document.getElementById('profile-particles');
@@ -70,6 +72,17 @@ const Layout1 = () => {
     const interval = setInterval(createParticle, 600);
     return () => { mounted = false; clearInterval(interval); };
   }, []);
+
+  const openModal = (content, type) => {
+    setModalContent(content);
+    setModalType(type);
+  };
+
+  const closeModal = () => {
+    setModalContent(null);
+    setModalType(null);
+  };
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       <Navbar />
@@ -163,7 +176,7 @@ const Layout1 = () => {
           <h2 className="text-2xl font-semibold mb-6">Media</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {profile.gallery.map((src, i) => (
-              <div key={i} className="rounded-xl overflow-hidden glassmorphism border border-border/60">
+              <div key={i} className="rounded-xl overflow-hidden glassmorphism border border-border/60 cursor-pointer hover:scale-105 transition-transform" onClick={() => openModal(src, 'image')}>
                 <img src={src} alt={`Gallery ${i + 1}`} className="w-full h-40 object-cover" />
               </div>
             ))}
@@ -175,15 +188,21 @@ const Layout1 = () => {
           <h2 className="text-2xl font-semibold mb-6">Video Gallery</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {profile.videos.slice(0, 2).map((src, i) => (
-              <div key={i} className="rounded-xl overflow-hidden glassmorphism border border-border/60">
+              <div key={i} className="rounded-xl overflow-hidden glassmorphism border border-border/60 cursor-pointer hover:scale-105 transition-transform" onClick={() => openModal(src, 'video')}>
                 <div className="relative pt-[56.25%]">
-                  <iframe
+                  <video
                     src={src}
-                    title={`Video ${i + 1}`}
-                    className="absolute inset-0 w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                    className="absolute inset-0 w-full h-full object-cover"
+                    muted
+                    preload="metadata"
                   />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -224,6 +243,30 @@ const Layout1 = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {modalContent && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={closeModal}>
+          <div className="relative max-w-4xl max-h-[90vh] mx-4" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={closeModal}
+              className="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center hover:scale-105 transition-transform z-10"
+            >
+              <X className="w-5 h-5 text-white" />
+            </button>
+            {modalType === 'image' ? (
+              <img src={modalContent} alt="Full size" className="max-w-full max-h-full object-contain rounded-xl" />
+            ) : (
+              <video
+                src={modalContent}
+                controls
+                autoPlay
+                className="max-w-full max-h-full rounded-xl"
+              />
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
