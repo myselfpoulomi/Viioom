@@ -84,7 +84,16 @@ const Layout2 = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <>
+      <style>
+        {`
+          @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+          }
+        `}
+      </style>
+      <div className="min-h-screen bg-background relative overflow-hidden">
       <Navbar />
       {/* Background Banner + Color Overlay */}
       <img
@@ -112,7 +121,7 @@ const Layout2 = () => {
         </div>
 
         {/* Business Information Section */}
-        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d">
+        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d" style={{animation: 'gentleFloat 6s ease-in-out infinite'}}>
           <h2 className="text-2xl font-semibold mb-6">About</h2>
           <p className="text-muted-foreground leading-relaxed">{profile.about}</p>
           <div className="grid md:grid-cols-2 gap-6 mt-6">
@@ -140,7 +149,7 @@ const Layout2 = () => {
         </div>
 
         {/* Social Media Links Section */}
-        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d">
+        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d" style={{animation: 'gentleFloat 6s ease-in-out infinite', animationDelay: '1s'}}>
           <h2 className="text-2xl font-semibold mb-6">Social Media</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {profile.socialLinks.map((s) => (
@@ -156,7 +165,7 @@ const Layout2 = () => {
         </div>
 
         {/* Website & App Links Section */}
-        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d">
+        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d" style={{animation: 'gentleFloat 6s ease-in-out infinite', animationDelay: '2s'}}>
           <h2 className="text-2xl font-semibold mb-6">Website & Apps</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {profile.websites.map((w) => (
@@ -172,7 +181,7 @@ const Layout2 = () => {
         </div>
 
         {/* Photo Gallery Section - Vertical Layout */}
-        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d">
+        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d" style={{animation: 'gentleFloat 6s ease-in-out infinite', animationDelay: '3s'}}>
           <h2 className="text-2xl font-semibold mb-6">Photo Gallery</h2>
           <div className="space-y-4">
             {profile.gallery.map((src, i) => (
@@ -184,7 +193,7 @@ const Layout2 = () => {
         </div>
 
         {/* Video Gallery - Vertical Layout */}
-        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d">
+        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d" style={{animation: 'gentleFloat 6s ease-in-out infinite', animationDelay: '4s'}}>
           <h2 className="text-2xl font-semibold mb-6">Video Gallery</h2>
           <div className="space-y-6">
             {profile.videos.slice(0, 2).map((src, i) => (
@@ -210,7 +219,7 @@ const Layout2 = () => {
         </div>
 
         {/* Quick Actions */}
-        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d border border-border/60">
+        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d border border-border/60" style={{animation: 'gentleFloat 6s ease-in-out infinite', animationDelay: '5s'}}>
           <h2 className="text-2xl font-semibold mb-6">Quick Actions</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="glassmorphism rounded-xl p-5 border border-border/60 hover:translate-y-[-3px] transition-transform">
@@ -267,7 +276,8 @@ const Layout2 = () => {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 };
 
