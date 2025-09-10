@@ -38,6 +38,10 @@ const profile = {
     'https://images.unsplash.com/photo-1554151228-14d9def656e4?w=600&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=600&auto=format&fit=crop',
   ],
+  videos: [
+    'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    'https://www.youtube.com/embed/oHg5SJYRHA0',
+  ],
 };
 
 const Layout1 = () => {
@@ -167,6 +171,26 @@ const Layout1 = () => {
             {profile.gallery.map((src, i) => (
               <div key={i} className="rounded-xl overflow-hidden glassmorphism border border-border/60">
                 <img src={src} alt={`Gallery ${i + 1}`} className="w-full h-40 object-cover" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Video Gallery */}
+        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d">
+          <h2 className="text-2xl font-semibold mb-6">Video Gallery</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {profile.videos.slice(0, 2).map((src, i) => (
+              <div key={i} className="rounded-xl overflow-hidden glassmorphism border border-border/60">
+                <div className="relative pt-[56.25%]">
+                  <iframe
+                    src={src}
+                    title={`Video ${i + 1}`}
+                    className="absolute inset-0 w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
               </div>
             ))}
           </div>
