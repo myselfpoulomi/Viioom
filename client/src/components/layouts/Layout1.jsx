@@ -161,12 +161,6 @@ const Layout1 = () => {
         {/* Media Section */}
         <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d">
           <h2 className="text-2xl font-semibold mb-6">Media</h2>
-          <div className="mb-8 text-center">
-            <div className="inline-block">
-              <img src={profile.avatar} alt="Profile" className="w-28 h-28 rounded-full object-cover border-4 border-background shadow-xl" />
-            </div>
-            <p className="text-sm text-muted-foreground mt-2">Profile Picture</p>
-          </div>
           <div className="grid md:grid-cols-3 gap-6">
             {profile.gallery.map((src, i) => (
               <div key={i} className="rounded-xl overflow-hidden glassmorphism border border-border/60">
