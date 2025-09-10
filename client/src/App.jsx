@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import CreateProfile from "./pages/CreateProfile";
 import LayoutSelection from "./pages/LayoutSelection";
 import Login from "./pages/Login";
+import Layout1 from "./components/layouts/Layout1";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/ratings" element={<Ratings />} />
             <Route path="/create-profile" element={<CreateProfile />} />
             <Route path="/layout-selection" element={<LayoutSelection />} />
+            <Route path="/layout1" element={<Layout1 />} />
             <Route path="/login" element={<Login />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

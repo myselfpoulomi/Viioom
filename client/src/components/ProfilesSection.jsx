@@ -173,6 +173,7 @@ const ProfilesSection = () => {
           {profiles.map((profile, index) => (
             <div
               key={index}
+              onClick={() => window.location.assign(`/profile/${encodeURIComponent(profile.name.toLowerCase().replace(/\s+/g,'-'))}`)}
               className="glassmorphism p-4 rounded-xl scroll-reveal group cursor-pointer hover:scale-105 transition-all duration-300"
               style={{ animationDelay: `${index * 0.05}s` }}
             >
