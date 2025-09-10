@@ -344,7 +344,7 @@ const CreateProfile = () => {
                 </div>
                 <div className="mt-6 flex items-center justify-between">
                   <button onClick={prev} className="glassmorphism px-5 py-3 rounded-lg font-semibold text-foreground">Back</button>
-                  <button onClick={() => navigate('/profile')} className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-lg font-semibold">
+                  <button onClick={() => navigate(isEditMode ? '/layout-selection' : '/profile')} className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-lg font-semibold">
                     {isEditMode ? "Update Profile" : "Create Profile"}
                   </button>
                 </div>
