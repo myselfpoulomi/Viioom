@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Phone, Mail, MapPin, Clock, Star, Globe, ExternalLink } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Star, Globe, ExternalLink, Download, QrCode, Copy } from 'lucide-react';
 import Navbar from '../Navbar';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -196,15 +196,42 @@ const Layout1 = () => {
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex justify-center gap-3">
-          <Button variant="outline" size="lg" className="hover:scale-105 transition-transform">
-            Contact
-          </Button>
-          <Button size="lg" className="animated-gradient text-primary-foreground hover:scale-105 transition-transform">
-            Visit Website
-          </Button>
+        {/* Quick Actions */}
+        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d border border-border/60">
+          <h2 className="text-2xl font-semibold mb-6">Quick Actions</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="glassmorphism rounded-xl p-5 border border-border/60 hover:translate-y-[-3px] transition-transform">
+              <p className="text-muted-foreground mb-4">Download your digital business card instantly.</p>
+              <button className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-background/70 border border-border/60 text-foreground hover:bg-foreground/5 transition-colors">
+                <Download className="h-4 w-4" />
+                <span>Download</span>
+              </button>
+            </div>
+            <div className="glassmorphism rounded-xl p-5 border border-border/60 hover:translate-y-[-3px] transition-transform">
+              <p className="text-muted-foreground mb-4">Create a custom QR of your landing page in minutes.</p>
+              <button className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-background/70 border border-border/60 text-foreground hover:bg-foreground/5 transition-colors">
+                <QrCode className="h-4 w-4" />
+                <span>Download</span>
+              </button>
+            </div>
+            <div className="glassmorphism rounded-xl p-5 border border-border/60 hover:translate-y-[-3px] transition-transform">
+              <p className="text-muted-foreground mb-3">Your profile shortlink for easy sharing.</p>
+              <div className="flex items-center gap-2 glassmorphism border border-border/60 rounded-lg px-3 py-2 justify-between">
+                <a href="https://viioom.in/johndoe" target="_blank" rel="noreferrer" className="text-sm text-foreground/90 hover:underline">viioom.in/johndoe</a>
+                <button
+                  aria-label="Copy link"
+                  className="p-2 rounded-md hover:bg-muted/40"
+                  onClick={() => navigator.clipboard && navigator.clipboard.writeText('https://viioom.in/johndoe')}
+                >
+                  <Copy className="h-4 w-4 text-muted-foreground" />
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+
+       
+    
       </div>
     </div>
   );
