@@ -200,7 +200,7 @@ const CreateProfile = () => {
                 </div>
                 <div className="mt-6 flex items-center justify-between">
                   <button onClick={prev} className="glassmorphism px-5 py-3 rounded-lg font-semibold text-foreground">Back</button>
-                  <button onClick={() => navigate('/layout-selection')} className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-lg font-semibold">Create Profile</button>
+                  <button onClick={() => navigate('/profile')} className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-lg font-semibold">Create Profile</button>
                 </div>
               </SectionCard>
             </div>

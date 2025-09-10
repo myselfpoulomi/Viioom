@@ -1,5 +1,5 @@
-import React, { useMemo, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import React, { useMemo, useState, useCallback, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AnimatedLayout from "../components/AnimatedLayout";
@@ -39,8 +39,13 @@ const LayoutSelection = () => {
     { id: "dynamic", title: "Dynamic Layout", gradient: "from-indigo-500 to-blue-600", description: "An optimized layout for online stores, focusing on products, promotions, and seamless shopping experiences." },
   ], []);
 
+  const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState(options[0].id);
   const onSelect = useCallback((id) => setSelectedId(id), []);
+
+  useEffect(() => {
+    sessionStorage.setItem("selectedLayoutId", selectedId);
+  }, [selectedId]);
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
@@ -69,7 +74,12 @@ const LayoutSelection = () => {
 
             <div className="mt-8 flex items-center justify-center gap-4">
               <Link to="/create-profile" className="glassmorphism px-6 py-3 rounded-full font-semibold">Back to Profile Details</Link>
-              <button className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-full font-semibold">Continue to Profile Preview</button>
+              <button
+                onClick={() => navigate("/user", { state: { selectedLayoutId: selectedId } })}
+                className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-full font-semibold"
+              >
+                Continue to Profile Preview
+              </button>
             </div>
           </div>
         </div>

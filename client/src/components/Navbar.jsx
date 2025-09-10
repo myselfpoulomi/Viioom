@@ -100,9 +100,16 @@ const Navbar = () => {
             >
               Ratings
             </Link>
-            <Link to="/login" className="magnetic-btn animated-gradient text-primary-foreground px-6 py-2 rounded-full font-medium transform hover:scale-110">
-              Sign In
-            </Link>
+            <button
+              aria-label="User menu"
+              onClick={() => navigate('/profile')}
+              className="relative w-9 h-9 rounded-full glassmorphism border border-border/60 grid place-items-center hover:scale-105 transition-transform"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-foreground/90">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
