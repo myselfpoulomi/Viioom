@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "../lib/utils";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,17 +24,23 @@ const Navbar = () => {
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center gap-8">
+        <div className="flex justify-between items-center h-16 gap-4">
+          {/* Left: Logo */}
+          <div className="flex items-center">
             <Link
               to="/"
               className="text-2xl font-bold animated-gradient bg-clip-text text-transparent breathing"
             >
               Viioom.in
             </Link>
+          </div>
 
-            {/* Search Bar */}
-            <div className="hidden lg:flex items-center glassmorphism px-4 py-2 rounded-full min-w-[400px]">
+          {/* Center: Search Bar */}
+          <div className="hidden md:flex flex-1 items-center justify-center">
+            <div
+              className="flex items-center glassmorphism h-11 px-4 rounded-full w-full max-w-2xl mx-4 border border-input/60 hover:border-input focus-within:border-primary/50 transition-colors"
+              onClick={() => navigate("/profiles")}
+            >
               <svg
                 className="w-5 h-5 text-muted-foreground mr-3"
                 fill="none"
@@ -55,6 +62,7 @@ const Navbar = () => {
             </div>
           </div>
 
+          {/* Right: Nav links */}
           <div className="hidden md:flex items-center space-x-6">
             <Link
               to="/"
