@@ -92,9 +92,9 @@ const Navbar = () => {
             >
               Ratings
             </Link>
-            <button className="magnetic-btn animated-gradient text-primary-foreground px-6 py-2 rounded-full font-medium transform hover:scale-110">
+            <Link to="/login" className="magnetic-btn animated-gradient text-primary-foreground px-6 py-2 rounded-full font-medium transform hover:scale-110">
               Sign In
-            </button>
+            </Link>
           </div>
         </div>
       </div>
