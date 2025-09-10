@@ -55,8 +55,33 @@ const CreateProfile = () => {
   const [step, setStep] = useState(isEditMode ? 3 : 1);
   const navigate = useNavigate();
 
+  // File upload states
+  const [profilePic, setProfilePic] = useState(null);
+  const [galleryImages, setGalleryImages] = useState(Array(6).fill(null));
+  const [videos, setVideos] = useState(Array(2).fill(null));
+
   const next = useCallback(() => setStep((s) => Math.min(3, s + 1)), []);
   const prev = useCallback(() => setStep((s) => Math.max(1, s - 1)), []);
+
+  const handleFileUpload = (file, type, index = null) => {
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      if (type === 'profilePic') {
+        setProfilePic({ file, preview: e.target.result });
+      } else if (type === 'gallery') {
+        const newGallery = [...galleryImages];
+        newGallery[index] = { file, preview: e.target.result };
+        setGalleryImages(newGallery);
+      } else if (type === 'video') {
+        const newVideos = [...videos];
+        newVideos[index] = { file, preview: URL.createObjectURL(file) };
+        setVideos(newVideos);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
@@ -187,17 +212,134 @@ const CreateProfile = () => {
 
               <SectionCard title="Upload Documents">
                 <div className="grid grid-cols-1 gap-5">
+                  {/* Profile Picture */}
                   <div className="glassmorphism rounded-xl p-6 text-center border border-border/60">
                     <div className="mb-3 text-muted-foreground">Profile Pic</div>
-                    <button className="magnetic-btn animated-gradient text-primary-foreground px-5 py-2 rounded-lg">Choose Profile Pic</button>
+                    {profilePic ? (
+                      <div className="space-y-3">
+                        <img src={profilePic.preview} alt="Profile preview" className="w-24 h-24 rounded-full object-cover mx-auto border-2 border-border/60" />
+                        <div className="flex gap-2 justify-center">
+                          <label className="glassmorphism px-4 py-2 rounded-lg cursor-pointer hover:bg-foreground/5 transition-colors">
+                            Change Pic
+                            <input
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={(e) => handleFileUpload(e.target.files[0], 'profilePic')}
+                            />
+                          </label>
+                          <button 
+                            onClick={() => setProfilePic(null)}
+                            className="glassmorphism px-4 py-2 rounded-lg text-red-600 hover:bg-red-50 transition-colors"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <label className="magnetic-btn animated-gradient text-primary-foreground px-5 py-2 rounded-lg cursor-pointer">
+                        Choose Profile Pic
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => handleFileUpload(e.target.files[0], 'profilePic')}
+                        />
+                      </label>
+                    )}
                   </div>
+
+                  {/* Gallery Images */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    {[1,2,3,4,5,6].map((i) => (
+                    {[0,1,2,3,4,5].map((i) => (
                       <div key={i} className="glassmorphism rounded-xl p-6 text-center border border-border/60">
-                        <div className="mb-2 text-muted-foreground">Gallery Image {i}</div>
-                        <button className="glassmorphism px-4 py-2 rounded-lg">Choose Image</button>
+                        <div className="mb-2 text-muted-foreground">Gallery Image {i + 1}</div>
+                        {galleryImages[i] ? (
+                          <div className="space-y-2">
+                            <img src={galleryImages[i].preview} alt={`Gallery ${i + 1}`} className="w-full h-20 object-cover rounded-lg border border-border/60" />
+                            <div className="flex gap-1 justify-center">
+                              <label className="glassmorphism px-2 py-1 rounded text-xs cursor-pointer hover:bg-foreground/5 transition-colors">
+                                Change
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  onChange={(e) => handleFileUpload(e.target.files[0], 'gallery', i)}
+                                />
+                              </label>
+                              <button 
+                                onClick={() => {
+                                  const newGallery = [...galleryImages];
+                                  newGallery[i] = null;
+                                  setGalleryImages(newGallery);
+                                }}
+                                className="glassmorphism px-2 py-1 rounded text-xs text-red-600 hover:bg-red-50 transition-colors"
+                              >
+                                Remove
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          <label className="glassmorphism px-4 py-2 rounded-lg cursor-pointer hover:bg-foreground/5 transition-colors">
+                            Choose Image
+                            <input
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={(e) => handleFileUpload(e.target.files[0], 'gallery', i)}
+                            />
+                          </label>
+                        )}
                       </div>
                     ))}
+                  </div>
+
+                  {/* Video Upload */}
+                  <div className="glassmorphism rounded-xl p-6 border border-border/60">
+                    <h4 className="text-lg font-semibold mb-4 text-foreground">Video Gallery</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      {[0,1].map((i) => (
+                        <div key={i} className="glassmorphism rounded-xl p-4 text-center border border-border/60">
+                          <div className="mb-2 text-muted-foreground">Video {i + 1}</div>
+                          {videos[i] ? (
+                            <div className="space-y-2">
+                              <video src={videos[i].preview} className="w-full h-32 object-cover rounded-lg border border-border/60" controls />
+                              <div className="flex gap-1 justify-center">
+                                <label className="glassmorphism px-2 py-1 rounded text-xs cursor-pointer hover:bg-foreground/5 transition-colors">
+                                  Change
+                                  <input
+                                    type="file"
+                                    accept="video/*"
+                                    className="hidden"
+                                    onChange={(e) => handleFileUpload(e.target.files[0], 'video', i)}
+                                  />
+                                </label>
+                                <button 
+                                  onClick={() => {
+                                    const newVideos = [...videos];
+                                    newVideos[i] = null;
+                                    setVideos(newVideos);
+                                  }}
+                                  className="glassmorphism px-2 py-1 rounded text-xs text-red-600 hover:bg-red-50 transition-colors"
+                                >
+                                  Remove
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <label className="glassmorphism px-4 py-2 rounded-lg cursor-pointer hover:bg-foreground/5 transition-colors">
+                              Choose Video
+                              <input
+                                type="file"
+                                accept="video/*"
+                                className="hidden"
+                                onChange={(e) => handleFileUpload(e.target.files[0], 'video', i)}
+                              />
+                            </label>
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 <div className="mt-6 flex items-center justify-between">
