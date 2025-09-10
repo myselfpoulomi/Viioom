@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AnimatedLayout from "../components/AnimatedLayout";
@@ -50,6 +51,7 @@ const SectionCard = ({ title, children }) => (
 
 const CreateProfile = () => {
   const [step, setStep] = useState(1);
+  const navigate = useNavigate();
 
   const next = useCallback(() => setStep((s) => Math.min(3, s + 1)), []);
   const prev = useCallback(() => setStep((s) => Math.max(1, s - 1)), []);
@@ -198,7 +200,7 @@ const CreateProfile = () => {
                 </div>
                 <div className="mt-6 flex items-center justify-between">
                   <button onClick={prev} className="glassmorphism px-5 py-3 rounded-lg font-semibold text-foreground">Back</button>
-                  <button className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-lg font-semibold">Create Profile</button>
+                  <button onClick={() => navigate('/layout-selection')} className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-lg font-semibold">Create Profile</button>
                 </div>
               </SectionCard>
             </div>
