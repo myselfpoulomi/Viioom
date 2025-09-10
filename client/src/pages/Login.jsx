@@ -5,12 +5,15 @@ import AnimatedLayout from "../components/AnimatedLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const onSubmit = useCallback(async (e) => {
     e.preventDefault();
@@ -19,11 +22,19 @@ const Login = () => {
     try {
       // TODO: integrate real auth API
       await new Promise((resolve) => setTimeout(resolve, 800));
-      // noop
+      
+      // Mock login - replace with real API call
+      login({
+        id: 1,
+        email: email,
+        name: "John Doe"
+      });
+      
+      navigate("/profile");
     } finally {
       setIsSubmitting(false);
     }
-  }, [isSubmitting]);
+  }, [isSubmitting, email, login, navigate]);
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">

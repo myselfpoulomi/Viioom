@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layout1 from "../components/layouts/Layout1";
+import { useAuth } from "../contexts/AuthContext";
 
 const layoutIdToComponent = {
   modern: Layout1,
@@ -10,6 +11,7 @@ const layoutIdToComponent = {
 const User = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { logout } = useAuth();
 
   const selectedLayoutId = useMemo(() => {
     return (
@@ -56,7 +58,7 @@ const User = () => {
 
   const handleLogout = () => {
     setMenuOpen(false);
-    // Placeholder: clear auth/session here
+    logout();
     navigate("/login");
   };
 
