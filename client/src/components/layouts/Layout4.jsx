@@ -185,7 +185,7 @@ const Layout4 = () => {
 
         {/* Photo Gallery custom mosaic: Row1 (rect + square), Row2 (3 square), Row3 (rectangle) */}
         <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d" style={{animation: 'gentleFloat 6s ease-in-out infinite', animationDelay: '2s'}}>
-          <h2 className="text-2xl font-semibold mb-6 text-center">Portfolios & Work Gallery</h2>
+          <h2 className="text-2xl font-semibold mb-6">Photo Gallery</h2>
           <div className="grid grid-cols-6 gap-4 md:gap-6">
             {/* Row 1: rectangle (col-span-4) + square (col-span-2) */}
             {profile.gallery[0] && (
