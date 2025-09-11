@@ -59,6 +59,10 @@ const CreateProfile = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [galleryImages, setGalleryImages] = useState(Array(6).fill(null));
   const [videos, setVideos] = useState(Array(2).fill(null));
+  // Social links
+  const [socialLinks, setSocialLinks] = useState([]);
+  const [showAddSocial, setShowAddSocial] = useState(false);
+  const [newSocial, setNewSocial] = useState({ platform: 'Whatsapp', url: '' });
 
   const next = useCallback(() => setStep((s) => Math.min(3, s + 1)), []);
   const prev = useCallback(() => setStep((s) => Math.max(1, s - 1)), []);
@@ -81,6 +85,17 @@ const CreateProfile = () => {
       }
     };
     reader.readAsDataURL(file);
+  };
+
+  const addSocialLink = () => {
+    if (!newSocial.url.trim()) return;
+    setSocialLinks((prev) => [...prev, { ...newSocial }]);
+    setNewSocial({ platform: newSocial.platform, url: '' });
+    setShowAddSocial(false);
+  };
+
+  const removeSocialLink = (idx) => {
+    setSocialLinks((prev) => prev.filter((_, i) => i !== idx));
   };
 
   return (
@@ -190,9 +205,49 @@ const CreateProfile = () => {
               </SectionCard>
 
               <SectionCard title="Social Media Links">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-muted-foreground">No social media links added yet. Click "Add Social Link" to get started.</div>
-                  <button className="glassmorphism px-4 py-2 rounded-lg">+ Add Social Link</button>
+                <div className="space-y-4">
+                  {socialLinks.length === 0 && (
+                    <div className="text-sm text-muted-foreground">No social media links added yet. Click "+" to add.</div>
+                  )}
+                  {socialLinks.length > 0 && (
+                    <div className="space-y-2">
+                      {socialLinks.map((s, idx) => (
+                        <div key={idx} className="glassmorphism border border-border/60 rounded-lg p-3 flex items-center justify-between">
+                          <div className="text-sm text-foreground"><span className="font-medium">{s.platform}</span> — <a className="text-primary hover:underline" href={s.url} target="_blank" rel="noreferrer">{s.url}</a></div>
+                          <button onClick={() => removeSocialLink(idx)} className="px-2 py-1 text-xs rounded hover:bg-foreground/5">Remove</button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {showAddSocial ? (
+                    <div className="grid grid-cols-1 md:grid-cols-[200px,1fr,auto] gap-3 items-end">
+                      <div>
+                        <label className="text-xs text-muted-foreground">Platform</label>
+                        <select
+                          className="w-full rounded-lg glassmorphism px-4 py-3 border border-border outline-none"
+                          value={newSocial.platform}
+                          onChange={(e) => setNewSocial((v) => ({ ...v, platform: e.target.value }))}
+                        >
+                          {['Whatsapp','Spotify','Telegram','Upwork','Fiverr','Pinterest','Wishlink','Hyped Creators','Reddit','Discord','Twitch'].map((p) => (
+                            <option key={p} value={p}>{p}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="text-xs text-muted-foreground">Profile/Channel URL</label>
+                        <Input placeholder="https://..." value={newSocial.url} onChange={(e) => setNewSocial((v) => ({ ...v, url: e.target.value }))} />
+                      </div>
+                      <div className="flex gap-2">
+                        <button onClick={addSocialLink} className="magnetic-btn animated-gradient text-primary-foreground px-4 py-3 rounded-lg font-semibold">Add</button>
+                        <button onClick={() => setShowAddSocial(false)} className="glassmorphism px-4 py-3 rounded-lg">Cancel</button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex justify-end">
+                      <button onClick={() => setShowAddSocial(true)} className="glassmorphism px-4 py-2 rounded-lg">+ Add Social Link</button>
+                    </div>
+                  )}
                 </div>
               </SectionCard>
 
