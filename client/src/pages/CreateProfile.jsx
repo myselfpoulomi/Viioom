@@ -40,8 +40,11 @@ const Input = (props) => (
   />
 );
 
-const SectionCard = ({ title, children }) => (
-  <div className="glassmorphism rounded-2xl p-6 md:p-8 card-3d border border-border/60">
+const SectionCard = ({ title, children, animationDelay = 0 }) => (
+  <div 
+    className="glassmorphism rounded-2xl p-6 md:p-8 card-3d border border-border/60" 
+    style={{animation: 'gentleFloat 6s ease-in-out infinite', animationDelay: `${animationDelay}s`}}
+  >
     <h3 className="text-lg font-semibold mb-4 text-foreground flex items-center gap-2">
       {title}
     </h3>
@@ -153,6 +156,14 @@ const CreateProfile = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
+      <style>
+        {`
+          @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+          }
+        `}
+      </style>
       <Navbar />
       <AnimatedLayout>
         <div className="max-w-5xl mx-auto pt-24 pb-16 px-4">
@@ -170,7 +181,7 @@ const CreateProfile = () => {
           <StepIndicator currentStep={step} />
 
           {step === 1 && (
-            <SectionCard title={<><span>Personal Information</span></>}>
+            <SectionCard title={<><span>Personal Information</span></>} animationDelay={0}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <Field label="Full Name *">
                   <Input placeholder="Enter your full name" />
@@ -198,7 +209,7 @@ const CreateProfile = () => {
           )}
 
           {step === 2 && (
-            <SectionCard title="Verify Your Email">
+            <SectionCard title="Verify Your Email" animationDelay={1}>
               <div className="max-w-md mx-auto">
                 <Field label="Enter Verification Code">
                   <Input placeholder="Enter 6-digit code" />
@@ -218,7 +229,7 @@ const CreateProfile = () => {
 
           {step === 3 && (
             <div className="space-y-6">
-              <SectionCard title="Business Information">
+              <SectionCard title="Business Information" animationDelay={0}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <Field label="Business Name *">
                     <Input placeholder="Enter business name" />
@@ -257,7 +268,7 @@ const CreateProfile = () => {
                 </div>
               </SectionCard>
 
-              <SectionCard title="Social Media Links">
+              <SectionCard title="Social Media Links" animationDelay={1}>
                 <div className="space-y-4">
                   {socialLinks.length === 0 && (
                     <div className="text-sm text-muted-foreground">No social media links added yet. Click "+" to add.</div>
@@ -266,8 +277,8 @@ const CreateProfile = () => {
                     <div className="space-y-2">
                       {socialLinks.map((s, idx) => (
                         <div key={idx} className="glassmorphism border border-border/60 rounded-lg p-3 flex items-center justify-between">
-                          <div className="text-sm text-foreground"><span className="font-medium">{s.platform}</span> — <a className="text-primary hover:underline" href={s.url} target="_blank" rel="noreferrer">{s.url}</a></div>
-                          <button onClick={() => removeSocialLink(idx)} className="px-2 py-1 text-xs rounded hover:bg-foreground/5">Remove</button>
+                          <div className="text-sm text-foreground"><span className="font-medium">{s.platform}</span> — <a className="text-primary" href={s.url} target="_blank" rel="noreferrer">{s.url}</a></div>
+                          <button onClick={() => removeSocialLink(idx)} className="px-2 py-1 text-xs rounded">Remove</button>
                         </div>
                       ))}
                     </div>
@@ -304,7 +315,7 @@ const CreateProfile = () => {
                 </div>
               </SectionCard>
 
-              <SectionCard title="Add Custom Buttons">
+              <SectionCard title="Add Custom Buttons" animationDelay={2}>
                 <div className="space-y-5">
                   {/* New Button Creator */}
                   <div className="grid grid-cols-1 md:grid-cols-[1fr,auto] gap-3 items-end">
@@ -324,7 +335,7 @@ const CreateProfile = () => {
                       <div key={idx} className="glassmorphism rounded-xl border border-border/60 p-4">
                         <div className="flex items-center justify-between mb-3">
                           <h4 className="font-semibold text-foreground">{btn.name}</h4>
-                          <button onClick={() => removeCustomButton(idx)} className="text-sm px-3 py-1 rounded hover:bg-foreground/5">Remove</button>
+                          <button onClick={() => removeCustomButton(idx)} className="text-sm px-3 py-1 rounded">Remove</button>
                         </div>
 
                         {/* Existing links under this button */}
@@ -332,8 +343,8 @@ const CreateProfile = () => {
                           <div className="space-y-2 mb-3">
                             {btn.links.map((l, li) => (
                               <div key={li} className="glassmorphism border border-border/60 rounded-lg p-3 flex items-center justify-between">
-                                <div className="text-sm"><span className="font-medium">{l.label}</span> — <a href={l.url} target="_blank" rel="noreferrer" className="text-primary hover:underline">{l.url}</a></div>
-                                <button onClick={() => removeCustomLink(idx, li)} className="px-2 py-1 text-xs rounded hover:bg-foreground/5">Remove</button>
+                                <div className="text-sm"><span className="font-medium">{l.label}</span> — <a href={l.url} target="_blank" rel="noreferrer" className="text-primary">{l.url}</a></div>
+                                <button onClick={() => removeCustomLink(idx, li)} className="px-2 py-1 text-xs rounded">Remove</button>
                               </div>
                             ))}
                           </div>
@@ -347,7 +358,7 @@ const CreateProfile = () => {
                 </div>
               </SectionCard>
 
-              <SectionCard title="Upload Documents">
+              <SectionCard title="Upload Documents" animationDelay={3}>
                 <div className="grid grid-cols-1 gap-5">
                   {/* Profile Picture */}
                   <div className="glassmorphism rounded-xl p-6 text-center border border-border/60">
@@ -356,7 +367,7 @@ const CreateProfile = () => {
                       <div className="space-y-3">
                         <img src={profilePic.preview} alt="Profile preview" className="w-24 h-24 rounded-full object-cover mx-auto border-2 border-border/60" />
                         <div className="flex gap-2 justify-center">
-                          <label className="glassmorphism px-4 py-2 rounded-lg cursor-pointer hover:bg-foreground/5 transition-colors">
+                          <label className="glassmorphism px-4 py-2 rounded-lg cursor-pointer">
                             Change Pic
                             <input
                               type="file"
@@ -367,7 +378,7 @@ const CreateProfile = () => {
                           </label>
                           <button 
                             onClick={() => setProfilePic(null)}
-                            className="glassmorphism px-4 py-2 rounded-lg text-red-600 hover:bg-red-50 transition-colors"
+                            className="glassmorphism px-4 py-2 rounded-lg text-red-600"
                           >
                             Remove
                           </button>
@@ -395,7 +406,7 @@ const CreateProfile = () => {
                           <div className="space-y-2">
                             <img src={galleryImages[i].preview} alt={`Gallery ${i + 1}`} className="w-full h-20 object-cover rounded-lg border border-border/60" />
                             <div className="flex gap-1 justify-center">
-                              <label className="glassmorphism px-2 py-1 rounded text-xs cursor-pointer hover:bg-foreground/5 transition-colors">
+                              <label className="glassmorphism px-2 py-1 rounded text-xs cursor-pointer">
                                 Change
                                 <input
                                   type="file"
@@ -410,14 +421,14 @@ const CreateProfile = () => {
                                   newGallery[i] = null;
                                   setGalleryImages(newGallery);
                                 }}
-                                className="glassmorphism px-2 py-1 rounded text-xs text-red-600 hover:bg-red-50 transition-colors"
+                                className="glassmorphism px-2 py-1 rounded text-xs text-red-600"
                               >
                                 Remove
                               </button>
                             </div>
                           </div>
                         ) : (
-                          <label className="glassmorphism px-4 py-2 rounded-lg cursor-pointer hover:bg-foreground/5 transition-colors">
+                          <label className="glassmorphism px-4 py-2 rounded-lg cursor-pointer">
                             Choose Image
                             <input
                               type="file"
@@ -442,7 +453,7 @@ const CreateProfile = () => {
                             <div className="space-y-2">
                               <video src={videos[i].preview} className="w-full h-32 object-cover rounded-lg border border-border/60" controls />
                               <div className="flex gap-1 justify-center">
-                                <label className="glassmorphism px-2 py-1 rounded text-xs cursor-pointer hover:bg-foreground/5 transition-colors">
+                                <label className="glassmorphism px-2 py-1 rounded text-xs cursor-pointer">
                                   Change
                                   <input
                                     type="file"
@@ -457,14 +468,14 @@ const CreateProfile = () => {
                                     newVideos[i] = null;
                                     setVideos(newVideos);
                                   }}
-                                  className="glassmorphism px-2 py-1 rounded text-xs text-red-600 hover:bg-red-50 transition-colors"
+                                  className="glassmorphism px-2 py-1 rounded text-xs text-red-600"
                                 >
                                   Remove
                                 </button>
                               </div>
                             </div>
                           ) : (
-                            <label className="glassmorphism px-4 py-2 rounded-lg cursor-pointer hover:bg-foreground/5 transition-colors">
+                            <label className="glassmorphism px-4 py-2 rounded-lg cursor-pointer">
                               Choose Video
                               <input
                                 type="file"
@@ -481,7 +492,7 @@ const CreateProfile = () => {
                 </div>
                 <div className="mt-6 flex items-center justify-between">
                   <button onClick={prev} className="glassmorphism px-5 py-3 rounded-lg font-semibold text-foreground">Back</button>
-                  <button onClick={() => navigate(isEditMode ? '/layout-selection' : '/profile')} className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-lg font-semibold">
+                  <button onClick={() => navigate('/layout-selection')} className="magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-lg font-semibold">
                     {isEditMode ? "Update Profile" : "Create Profile"}
                   </button>
                 </div>
