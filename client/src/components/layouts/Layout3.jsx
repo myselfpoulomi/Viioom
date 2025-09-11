@@ -120,7 +120,7 @@ const Layout3 = () => {
           </div>
           <h1 className="mt-6 text-3xl md:text-4xl font-bold text-foreground">{profile.name}</h1>
           <p className="text-muted-foreground text-lg">{profile.title}</p>
-          <p className="text-muted-foreground/80 text-sm mt-1">{profile.type}</p>
+          
           
           {/* Social Media Icons */}
           <div className="flex justify-center gap-4 mt-6">
