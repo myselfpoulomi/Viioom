@@ -5,6 +5,7 @@ import Layout2 from "../components/layouts/Layout2";
 import Layout3 from "../components/layouts/Layout3";
 import Layout4 from "../components/layouts/Layout4";
 import Layout5 from "../components/layouts/Layout5";
+import Layout6 from "../components/layouts/Layout6";
 import { useAuth } from "../contexts/AuthContext";
 
 const layoutIdToComponent = {
@@ -13,6 +14,7 @@ const layoutIdToComponent = {
   vibrant: Layout3,
   elegant: Layout4,
   structured: Layout5,
+  dynamic: Layout6,
   // Map other ids (elegant, structured, dynamic) when available
 };
 
