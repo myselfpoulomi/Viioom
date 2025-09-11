@@ -192,11 +192,11 @@ const Layout3 = () => {
         {/* Photo Gallery 2-1-2-1 pattern */}
         <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d" style={{animation: 'gentleFloat 6s ease-in-out infinite', animationDelay: '2s'}}>
           <h2 className="text-2xl font-semibold mb-6 text-center">Portfolios & Work Gallery</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-4 md:gap-6">
             {profile.gallery.map((src, i) => (
               <div
                 key={i}
-                className={`glassmorphism rounded-xl overflow-hidden cursor-pointer hover:scale-105 transition-transform ${i % 3 === 2 ? 'md:col-span-2' : ''}`}
+                className={`glassmorphism rounded-xl overflow-hidden cursor-pointer hover:scale-105 transition-transform ${i % 3 === 2 ? 'col-span-2' : ''}`}
                 onClick={() => openModal(src, 'image')}
               >
                 <div className={`${i % 3 === 2 ? 'h-56' : 'h-48'} bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center`}>
