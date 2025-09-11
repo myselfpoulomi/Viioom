@@ -33,7 +33,7 @@ const LayoutSelection = () => {
   const options = useMemo(() => [
     { id: "modern", title: "Modern Layout", gradient: "from-blue-500 to-cyan-500", description: "A sleek, optimized layout with modern aesthetics and balanced spacing for clarity." },
     { id: "classic", title: "Classic Layout", gradient: "from-teal-400 to-emerald-500", description: "A timeless, professional design emphasizing trust and stability." },
-    { id: "vibrant", title: "Vibrant Layout", gradient: "from-red-500 to-orange-500", description: "A vibrant, appetizing layout ideal for restaurants and cafes, focusing on menu and ambiance." },
+    { id: "vibrant", title: "Portfolio Layout", gradient: "from-purple-500 to-indigo-500", description: "A creative layout with floating social icons, portfolio gallery, and website links for showcasing work." },
     { id: "elegant", title: "Elegant Layout", gradient: "from-fuchsia-500 to-pink-500", description: "A minimal yet elegant template for showcasing creative work or case studies beautifully." },
     { id: "structured", title: "Structured Layout", gradient: "from-yellow-400 to-green-500", description: "A structured layout for listing services with clear calls to action and highlights." },
     { id: "dynamic", title: "Dynamic Layout", gradient: "from-indigo-500 to-blue-600", description: "An optimized layout for online stores, focusing on products, promotions, and seamless shopping experiences." },
