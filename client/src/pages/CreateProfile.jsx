@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from "react";
+import React, { useMemo, useState, useCallback, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -90,6 +90,11 @@ const CreateProfile = () => {
   // Custom Buttons and links
   const [customButtons, setCustomButtons] = useState([]); // [{name: string, links: [{label, url}]}]
   const [newButtonName, setNewButtonName] = useState('');
+
+  // Persist to sessionStorage so preview layouts can read
+  useEffect(() => {
+    sessionStorage.setItem('customButtons', JSON.stringify(customButtons));
+  }, [customButtons]);
 
   const next = useCallback(() => setStep((s) => Math.min(3, s + 1)), []);
   const prev = useCallback(() => setStep((s) => Math.max(1, s - 1)), []);

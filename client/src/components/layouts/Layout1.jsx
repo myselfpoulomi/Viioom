@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Phone, Mail, MapPin, Clock, Star, Globe, ExternalLink, Download, QrCode, Copy, X } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Star, Globe, ExternalLink, Download, QrCode, Copy, X, ChevronDown } from 'lucide-react';
 import Navbar from '../Navbar';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -50,6 +50,7 @@ const Layout1 = () => {
   const coverSrc = params.get('bg') || profile.cover;
   const [modalContent, setModalContent] = useState(null);
   const [modalType, setModalType] = useState(null);
+  const [customButtons, setCustomButtons] = useState([]);
   
   useEffect(() => {
     const container = document.getElementById('profile-particles');
@@ -82,6 +83,13 @@ const Layout1 = () => {
     setModalContent(null);
     setModalType(null);
   };
+
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem('customButtons');
+      if (stored) setCustomButtons(JSON.parse(stored));
+    } catch {}
+  }, []);
 
   return (
     <>
@@ -118,6 +126,30 @@ const Layout1 = () => {
           </div>
           <h1 className="mt-4 text-3xl md:text-4xl font-bold text-foreground">{profile.name}</h1>
           <p className="text-muted-foreground">{profile.title}</p>
+          {/* Custom Buttons under header */}
+          <div className="flex justify-center gap-3 mt-4 flex-wrap">
+            {customButtons.map((btn, i) => (
+              <div key={i} className="relative group">
+                <button className="glassmorphism px-4 py-2 rounded-xl border border-border/60 flex items-center gap-2">
+                  <Globe className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm font-medium">{btn.name}</span>
+                  <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                </button>
+                {btn.links?.length > 0 && (
+                  <div className="absolute left-0 mt-2 min-w-[220px] z-20 hidden group-hover:block">
+                    <div className="glassmorphism rounded-xl border border-border/60 p-2 space-y-1">
+                      {btn.links.map((l, li) => (
+                        <a key={li} href={l.url} target="_blank" rel="noreferrer" className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-foreground/5">
+                          <span className="text-sm">{l.label}</span>
+                          <ExternalLink className="h-3 w-3 text-muted-foreground" />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Business Information Section */}
@@ -164,21 +196,7 @@ const Layout1 = () => {
           </div>
         </div>
 
-        {/* Website & App Links Section */}
-        <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d" style={{animation: 'gentleFloat 6s ease-in-out infinite', animationDelay: '2s'}}>
-          <h2 className="text-2xl font-semibold mb-6">Website & Apps</h2>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {profile.websites.map((w) => (
-              <a key={w.label} href={w.url} target="_blank" rel="noreferrer" className="glassmorphism p-4 rounded-xl border border-border/60 flex items-center justify-between hover:scale-[1.02] transition-transform">
-                <div className="flex items-center gap-3">
-                  <Globe className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-medium">{w.label}</span>
-                </div>
-                <ExternalLink className="h-4 w-4 text-muted-foreground" />
-              </a>
-            ))}
-          </div>
-        </div>
+        
 
         {/* Photo Gallery Section */}
         <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d" style={{animation: 'gentleFloat 6s ease-in-out infinite', animationDelay: '3s'}}>
