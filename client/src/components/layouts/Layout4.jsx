@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Phone, Mail, MapPin, Clock, Star, Globe, ExternalLink, Download, QrCode, Copy, X, Facebook, Instagram, Linkedin, Youtube, Link } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Star, Globe, ExternalLink, Download, QrCode, Copy, X, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 import Navbar from '../Navbar';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 const profile = {
   name: 'Alex Johnson',
   title: 'Digital Creator & Entrepreneur',
-  type: 'Service Provider',
   about:
     'Passionate digital creator with 8+ years of experience in web development, design, and entrepreneurship. I help businesses transform their digital presence through innovative solutions and creative strategies.',
   phone: '+1 (555) 123-4567',
@@ -16,9 +15,6 @@ const profile = {
   hours: 'Mon–Fri 9AM–6PM',
   rating: 4.9,
   ratingLabel: 'Google Rating',
-  storeType: 'Service',
-  openTime: '09:00',
-  closeTime: '18:00',
   socialLinks: [
     { label: 'Facebook', url: 'https://facebook.com/', icon: Facebook },
     { label: 'Instagram', url: 'https://instagram.com/', icon: Instagram },
@@ -46,7 +42,7 @@ const profile = {
   ],
 };
 
-const Layout3 = () => {
+const Layout4 = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const coverSrc = params.get('bg') || profile.cover;
@@ -121,7 +117,6 @@ const Layout3 = () => {
           <h1 className="mt-6 text-3xl md:text-4xl font-bold text-foreground">{profile.name}</h1>
           <p className="text-muted-foreground text-lg">{profile.title}</p>
           
-          
           {/* Social Media Icons */}
           <div className="flex justify-center gap-4 mt-6">
             {profile.socialLinks.map((social) => {
@@ -160,7 +155,6 @@ const Layout3 = () => {
           </div>
         </div>
 
-
         {/* Business Information Section */}
         <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d" style={{animation: 'gentleFloat 6s ease-in-out infinite'}}>
           <h2 className="text-2xl font-semibold mb-6">About</h2>
@@ -189,25 +183,45 @@ const Layout3 = () => {
           </div>
         </div>
 
-        {/* Photo Gallery 2-1-2-1 pattern */}
+        {/* Photo Gallery custom mosaic: Row1 (rect + square), Row2 (3 square), Row3 (rectangle) */}
         <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d" style={{animation: 'gentleFloat 6s ease-in-out infinite', animationDelay: '2s'}}>
           <h2 className="text-2xl font-semibold mb-6 text-center">Portfolios & Work Gallery</h2>
-          <div className="grid grid-cols-2 gap-4 md:gap-6">
-            {profile.gallery.map((src, i) => (
-              <div
-                key={i}
-                className={`glassmorphism rounded-xl overflow-hidden cursor-pointer hover:scale-105 transition-transform ${i % 3 === 2 ? 'col-span-2' : ''}`}
-                onClick={() => openModal(src, 'image')}
-              >
-                <div className={`${i % 3 === 2 ? 'h-56' : 'h-48'} bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center`}>
-                  <img src={src} alt={`Portfolio ${i + 1}`} className="w-full h-full object-cover" />
+          <div className="grid grid-cols-6 gap-4 md:gap-6">
+            {/* Row 1: rectangle (col-span-4) + square (col-span-2) */}
+            {profile.gallery[0] && (
+              <div className="col-span-4 rounded-xl overflow-hidden cursor-pointer hover:scale-105 transition-transform" onClick={() => openModal(profile.gallery[0], 'image')}>
+                <div className="h-48 md:h-56 bg-gradient-to-br from-purple-500/20 to-blue-500/20">
+                  <img src={profile.gallery[0]} alt="Gallery 1" className="w-full h-full object-cover" />
+                </div>
+              </div>
+            )}
+            {profile.gallery[1] && (
+              <div className="col-span-2 rounded-xl overflow-hidden cursor-pointer hover:scale-105 transition-transform" onClick={() => openModal(profile.gallery[1], 'image')}>
+                <div className="h-48 bg-gradient-to-br from-purple-500/20 to-blue-500/20">
+                  <img src={profile.gallery[1]} alt="Gallery 2" className="w-full h-full object-cover" />
+                </div>
+              </div>
+            )}
+
+            {/* Row 2: 3 squares (2-2-2) */}
+            {profile.gallery.slice(2, 5).map((src, idx) => (
+              <div key={`r2-${idx}`} className="col-span-2 rounded-xl overflow-hidden cursor-pointer hover:scale-105 transition-transform" onClick={() => openModal(src, 'image')}>
+                <div className="h-40 md:h-48 bg-gradient-to-br from-purple-500/20 to-blue-500/20">
+                  <img src={src} alt={`Gallery ${idx + 3}`} className="w-full h-full object-cover" />
                 </div>
               </div>
             ))}
+
+            {/* Row 3: 1 rectangle full width */}
+            {profile.gallery[5] && (
+              <div className="col-span-6 rounded-xl overflow-hidden cursor-pointer hover:scale-105 transition-transform" onClick={() => openModal(profile.gallery[5], 'image')}>
+                <div className="h-48 md:h-56 bg-gradient-to-br from-purple-500/20 to-blue-500/20">
+                  <img src={profile.gallery[5]} alt="Gallery 6" className="w-full h-full object-cover" />
+                </div>
+              </div>
+            )}
           </div>
         </div>
-
-        
 
         {/* Video Gallery - One per row */}
         <div className="glassmorphism p-8 rounded-2xl mb-8 card-3d" style={{animation: 'gentleFloat 6s ease-in-out infinite', animationDelay: '4s'}}>
@@ -298,4 +312,4 @@ const Layout3 = () => {
   );
 };
 
-export default Layout3;
+export default Layout4;

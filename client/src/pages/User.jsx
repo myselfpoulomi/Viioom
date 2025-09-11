@@ -3,12 +3,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Layout1 from "../components/layouts/Layout1";
 import Layout2 from "../components/layouts/Layout2";
 import Layout3 from "../components/layouts/Layout3";
+import Layout4 from "../components/layouts/Layout4";
 import { useAuth } from "../contexts/AuthContext";
 
 const layoutIdToComponent = {
   modern: Layout1,
   classic: Layout2,
   vibrant: Layout3,
+  elegant: Layout4,
   // Map other ids (elegant, structured, dynamic) when available
 };
 
