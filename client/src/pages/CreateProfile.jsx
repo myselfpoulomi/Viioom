@@ -49,6 +49,30 @@ const SectionCard = ({ title, children }) => (
   </div>
 );
 
+// Inline helper component: link add row for custom buttons
+const AddLinkRow = ({ onAdd }) => {
+  const [label, setLabel] = React.useState('');
+  const [url, setUrl] = React.useState('');
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-[200px,1fr,auto] gap-3 items-end">
+      <div>
+        <label className="text-xs text-muted-foreground">Link Name</label>
+        <Input placeholder="e.g. Website, App, Store" value={label} onChange={(e) => setLabel(e.target.value)} />
+      </div>
+      <div>
+        <label className="text-xs text-muted-foreground">URL</label>
+        <Input placeholder="https://..." value={url} onChange={(e) => setUrl(e.target.value)} />
+      </div>
+      <button
+        onClick={() => { onAdd({ label, url }); setLabel(''); setUrl(''); }}
+        className="glassmorphism px-4 py-3 rounded-lg"
+      >
+        + Add Link
+      </button>
+    </div>
+  );
+};
+
 const CreateProfile = () => {
   const location = useLocation();
   const isEditMode = location.state?.isEditMode || false;
@@ -63,6 +87,9 @@ const CreateProfile = () => {
   const [socialLinks, setSocialLinks] = useState([]);
   const [showAddSocial, setShowAddSocial] = useState(false);
   const [newSocial, setNewSocial] = useState({ platform: 'Whatsapp', url: '' });
+  // Custom Buttons and links
+  const [customButtons, setCustomButtons] = useState([]); // [{name: string, links: [{label, url}]}]
+  const [newButtonName, setNewButtonName] = useState('');
 
   const next = useCallback(() => setStep((s) => Math.min(3, s + 1)), []);
   const prev = useCallback(() => setStep((s) => Math.max(1, s - 1)), []);
@@ -96,6 +123,27 @@ const CreateProfile = () => {
 
   const removeSocialLink = (idx) => {
     setSocialLinks((prev) => prev.filter((_, i) => i !== idx));
+  };
+
+  // Custom Buttons handlers
+  const addCustomButton = () => {
+    const name = newButtonName.trim();
+    if (!name) return;
+    setCustomButtons((prev) => [...prev, { name, links: [] }]);
+    setNewButtonName('');
+  };
+
+  const removeCustomButton = (idx) => {
+    setCustomButtons((prev) => prev.filter((_, i) => i !== idx));
+  };
+
+  const addCustomLink = (buttonIdx, newLink) => {
+    if (!newLink.label.trim() || !newLink.url.trim()) return;
+    setCustomButtons((prev) => prev.map((b, i) => i === buttonIdx ? { ...b, links: [...b.links, newLink] } : b));
+  };
+
+  const removeCustomLink = (buttonIdx, linkIdx) => {
+    setCustomButtons((prev) => prev.map((b, i) => i === buttonIdx ? { ...b, links: b.links.filter((_, li) => li !== linkIdx) } : b));
   };
 
   return (
@@ -251,17 +299,46 @@ const CreateProfile = () => {
                 </div>
               </SectionCard>
 
-              <SectionCard title="Website & App Links">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <Field label="Website URL">
-                    <Input placeholder="Enter website url" />
-                  </Field>
-                  <Field label="Play Store Link">
-                    <Input placeholder="Enter play store link" />
-                  </Field>
-                </div>
-                <div className="mt-4 flex justify-end">
-                  <button className="glassmorphism px-4 py-2 rounded-lg">+ Add Link</button>
+              <SectionCard title="Add Custom Buttons">
+                <div className="space-y-5">
+                  {/* New Button Creator */}
+                  <div className="grid grid-cols-1 md:grid-cols-[1fr,auto] gap-3 items-end">
+                    <Field label="Button Name">
+                      <Input placeholder="e.g. My Products, Book Now, Menu" value={newButtonName} onChange={(e) => setNewButtonName(e.target.value)} />
+                    </Field>
+                    <button onClick={addCustomButton} className="magnetic-btn animated-gradient text-primary-foreground px-5 py-3 rounded-lg font-semibold">+ Create Button</button>
+                  </div>
+
+                  {/* Buttons List */}
+                  {customButtons.length === 0 && (
+                    <div className="text-sm text-muted-foreground">No custom buttons yet. Create one above.</div>
+                  )}
+
+                  <div className="space-y-4">
+                    {customButtons.map((btn, idx) => (
+                      <div key={idx} className="glassmorphism rounded-xl border border-border/60 p-4">
+                        <div className="flex items-center justify-between mb-3">
+                          <h4 className="font-semibold text-foreground">{btn.name}</h4>
+                          <button onClick={() => removeCustomButton(idx)} className="text-sm px-3 py-1 rounded hover:bg-foreground/5">Remove</button>
+                        </div>
+
+                        {/* Existing links under this button */}
+                        {btn.links.length > 0 && (
+                          <div className="space-y-2 mb-3">
+                            {btn.links.map((l, li) => (
+                              <div key={li} className="glassmorphism border border-border/60 rounded-lg p-3 flex items-center justify-between">
+                                <div className="text-sm"><span className="font-medium">{l.label}</span> — <a href={l.url} target="_blank" rel="noreferrer" className="text-primary hover:underline">{l.url}</a></div>
+                                <button onClick={() => removeCustomLink(idx, li)} className="px-2 py-1 text-xs rounded hover:bg-foreground/5">Remove</button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Add link row for this button */}
+                        <AddLinkRow onAdd={(link) => addCustomLink(idx, link)} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </SectionCard>
 
