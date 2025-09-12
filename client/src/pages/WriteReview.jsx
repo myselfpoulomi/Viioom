@@ -195,7 +195,7 @@ const WriteReview = () => {
         </div>
 
         {/* Review Form */}
-        <Card className="bg-transparent border-0 shadow-xl scroll-reveal hover:scale-[1.02] transition-all duration-300 backdrop-blur-md bg-white/10">
+        <Card className="glassmorphism border-0 shadow-xl scroll-reveal hover:scale-[1.02] transition-all duration-300">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold">Write Your Review</CardTitle>
             <CardDescription>
@@ -334,7 +334,7 @@ const WriteReview = () => {
 
         {/* Additional Info */}
         <div className="mt-12 text-center scroll-reveal">
-          <div className="bg-transparent backdrop-blur-md bg-white/10 rounded-2xl p-6 max-w-2xl mx-auto hover:scale-[1.02] transition-all duration-300">
+          <div className="glassmorphism rounded-2xl p-6 max-w-2xl mx-auto hover:scale-[1.02] transition-all duration-300">
             <h3 className="text-lg font-semibold mb-2">Why Your Review Matters</h3>
             <p className="text-muted-foreground">
               Your honest feedback helps other users make informed decisions and helps us continuously improve Viioom. 
