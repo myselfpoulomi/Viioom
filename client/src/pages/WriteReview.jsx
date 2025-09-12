@@ -157,7 +157,7 @@ const WriteReview = () => {
               key={star}
               type="button"
               onClick={() => onRatingChange(star)}
-              className={`w-8 h-8 transition-all duration-200 hover:scale-110 ${
+              className={`w-12 h-12 transition-all duration-200 hover:scale-110 ${
                 star <= rating 
                   ? 'text-yellow-500 fill-current' 
                   : 'text-gray-300 hover:text-yellow-400'
