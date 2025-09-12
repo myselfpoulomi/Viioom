@@ -17,6 +17,7 @@ import LayoutSelection from "./pages/LayoutSelection";
 import Login from "./pages/Login";
 import Layout1 from "./components/layouts/Layout1";
 import User from "./pages/User";
+import WriteReview from "./pages/WriteReview";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ function App() {
             <Route path="/user" element={<User />} />
             <Route path="/profile" element={<User />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/write-review" element={<WriteReview />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

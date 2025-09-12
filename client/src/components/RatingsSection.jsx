@@ -1,6 +1,9 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RatingsSection = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const revealElements = document.querySelectorAll(".scroll-reveal");
     const observer = new IntersectionObserver(
@@ -173,8 +176,11 @@ const RatingsSection = () => {
 
         {/* CTA */}
         <div className="mt-16 text-center scroll-reveal">
-          <button className="magnetic-btn animated-gradient text-primary-foreground px-8 py-4 rounded-full text-lg font-semibold hover:scale-110 transition-transform">
-            Join Our Community
+          <button 
+            onClick={() => navigate("/write-review")}
+            className="magnetic-btn animated-gradient text-primary-foreground px-8 py-4 rounded-full text-lg font-semibold hover:scale-110 transition-transform"
+          >
+            Write Review
           </button>
         </div>
       </div>
