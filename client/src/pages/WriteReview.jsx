@@ -169,7 +169,7 @@ const WriteReview = () => {
             </button>
           ))}
           <span className="text-sm text-muted-foreground ml-2">
-            {rating > 0 ? `${rating} star${rating > 1 ? 's' : ''}` : 'Select rating'}
+            {rating > 0 ? `${rating} star${rating > 1 ? 's' : ''}` : ''}
           </span>
         </div>
         {error && <p className="text-sm text-red-500 text-center">{error}</p>}
