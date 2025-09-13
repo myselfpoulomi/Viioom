@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, Star, Award, User2, Bolt, MessageSquare } from 'lucide-react';
+import { Users, Star, Award } from 'lucide-react';
 
 const Stat = ({ icon: Icon, value, label, bg }) => (
   <div className="card-3d glassmorphism rounded-2xl p-8 text-center border border-border/60 group cursor-pointer scroll-reveal transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
@@ -8,16 +8,6 @@ const Stat = ({ icon: Icon, value, label, bg }) => (
     </div>
     <div className="text-4xl font-bold text-foreground mb-2">{value}</div>
     <div className="text-muted-foreground text-sm">{label}</div>
-  </div>
-);
-
-const FeatureCard = ({ icon: Icon, title, description, bg }) => (
-  <div className="card-3d glassmorphism rounded-2xl p-8 text-center border border-border/60 group cursor-pointer scroll-reveal transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110 ${bg}`}>
-      <Icon className="text-white" size={22} />
-    </div>
-    <h4 className="text-foreground font-semibold mb-2">{title}</h4>
-    <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
   </div>
 );
 
@@ -32,27 +22,6 @@ const StatsAndFeaturesSection = () => {
           <Stat icon={Award} value={"4.7/5"} label="Average Rating" bg="bg-purple-500" />
         </div>
 
-        {/* Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          <FeatureCard
-            icon={User2}
-            title="Business Profile"
-            description="Complete business information and branding"
-            bg="bg-purple-500"
-          />
-          <FeatureCard
-            icon={Bolt}
-            title="Social Integration"
-            description="Connect all your social media platforms"
-            bg="bg-emerald-500"
-          />
-          <FeatureCard
-            icon={MessageSquare}
-            title="Customer Reviews"
-            description="Build trust with authentic customer feedback"
-            bg="bg-orange-500"
-          />
-        </div>
 
         <div className="text-center">
           <a href="/create-profile" className="inline-flex items-center gap-2 magnetic-btn animated-gradient text-primary-foreground px-6 py-3 rounded-full font-semibold">
