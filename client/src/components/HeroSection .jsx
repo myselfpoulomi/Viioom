@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Counter from "./Counter";
+import ParticleSystem from "./ParticleSystem";
 
 const HeroSection = () => {
   const texts = ["One Profile", "One Link", "One Brand"];
@@ -61,6 +62,35 @@ const HeroSection = () => {
 
   return (
     <section className="pt-24 pb-0 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex items-center">
+      <ParticleSystem />
+
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-10 left-10 w-32 h-32 rounded-2xl overflow-hidden opacity-20 transform rotate-12 floating glassmorphism">
+          <div className="w-full h-full animated-gradient flex items-center justify-center text-primary-foreground text-4xl">
+            📸
+          </div>
+        </div>
+        <div className="absolute top-32 right-20 w-24 h-24 rounded-full overflow-hidden opacity-25 floating floating-delay-1 glassmorphism">
+          <div className="w-full h-full animated-gradient flex items-center justify-center text-primary-foreground text-2xl">
+            🎨
+          </div>
+        </div>
+        <div className="absolute bottom-20 left-1/4 w-28 h-28 rounded-2xl overflow-hidden opacity-15 transform -rotate-6 floating floating-delay-2 glassmorphism">
+          <div className="w-full h-full animated-gradient flex items-center justify-center text-primary-foreground text-3xl">
+            🌟
+          </div>
+        </div>
+
+        {/* Pulsing Rings */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <div className="pulse-ring w-96 h-96 border-2 border-primary/30 rounded-full absolute"></div>
+          <div
+            className="pulse-ring w-96 h-96 border-2 border-accent/30 rounded-full absolute"
+            style={{ animationDelay: "1s" }}
+          ></div>
+        </div>
+      </div>
 
       <div className="max-w-7xl mx-auto text-center md:text-left relative z-10">
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10">
