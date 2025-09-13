@@ -40,8 +40,17 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link
               to="/"
-              className="text-2xl font-bold animated-gradient bg-clip-text text-transparent breathing"
+              className="flex items-center gap-3 text-2xl font-bold animated-gradient bg-clip-text text-transparent breathing"
             >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-10 h-10 rounded-lg"
+              >
+                <source src="/logo.mp4" type="video/mp4" />
+              </video>
               Viioom.in
             </Link>
           </div>
