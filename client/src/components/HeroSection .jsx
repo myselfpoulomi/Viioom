@@ -93,7 +93,7 @@ const HeroSection = () => {
       </div>
 
       <div className="max-w-7xl mx-auto text-center md:text-left relative z-10">
-        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="flex-1">
             <div className="scroll-reveal">
               <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
@@ -141,7 +141,7 @@ const HeroSection = () => {
             <img
               src="/banner.png"
               alt="Hero Banner"
-              className="w-72 md:w-96 lg:w-[420px] h-auto object-cover"
+              className="w-80 md:w-[500px] lg:w-[600px] h-auto object-cover"
             />
           </div>
         </div>
