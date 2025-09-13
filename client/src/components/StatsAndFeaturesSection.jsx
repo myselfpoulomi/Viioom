@@ -2,7 +2,7 @@ import React from 'react';
 import { Users, Star, Award } from 'lucide-react';
 
 const Stat = ({ icon: Icon, value, label, bg }) => (
-  <div className="card-3d glassmorphism rounded-2xl p-8 text-center border border-border/60 group cursor-pointer scroll-reveal transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+  <div className="glassmorphism rounded-2xl p-8 text-center group cursor-pointer scroll-reveal transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
     <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110 ${bg}`}>
       <Icon className="text-white" size={28} />
     </div>
@@ -16,7 +16,7 @@ const StatsAndFeaturesSection = () => {
     <section className="pt-0 pb-12 -mt-2 md:-mt-4 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Top Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-14">
+        <div className="flex flex-wrap justify-center items-start gap-6 mb-14">
           <Stat icon={Users} value={"42+"} label="Active Users" bg="bg-emerald-500" />
           <Stat icon={Star} value={"3+"} label="Customer Reviews" bg="bg-orange-500" />
           <Stat icon={Award} value={"4.7/5"} label="Average Rating" bg="bg-purple-500" />

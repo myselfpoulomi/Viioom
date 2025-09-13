@@ -33,7 +33,7 @@ const WelcomeSection = () => {
         </div>
         
         {/* Content Box */}
-        <div className="glassmorphism rounded-xl p-8 md:p-12 mt-8 card-3d">
+        <div className="glassmorphism rounded-xl p-8 md:p-12 mt-8 border border-border/40">
           <div className="text-foreground text-lg md:text-xl leading-relaxed space-y-4">
             <p>
               At <span className="animated-gradient bg-clip-text text-transparent font-semibold">Viioom</span>, we make it easy for businesses and professionals to create a smart digital presence. With just one link, you can showcase everything — your contact details, social media, menu, catalogue, website, and more.

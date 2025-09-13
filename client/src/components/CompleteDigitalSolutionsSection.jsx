@@ -72,7 +72,7 @@ const CompleteDigitalSolutionsSection = () => {
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="glassmorphism rounded-xl p-6 card-3d"
+              className="glassmorphism rounded-xl p-6 border border-border/40"
             >
               {/* Icon */}
               <div className={`${feature.iconBg} w-16 h-16 rounded-lg flex items-center justify-center text-white mb-6`}>
